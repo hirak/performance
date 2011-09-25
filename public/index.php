@@ -18,13 +18,30 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path()
 )));
 
-/** Zend_Application */
-require_once 'Zend/Application.php';
+main();
+function main() {
+    $key = 'app_performance';
+    $config = apc_fetch($key, $success);
+    if (!$success) {
+        $config = new Zend_Config_Ini(
+            APPLICATION_PATH . '/configs/application.ini',
+            APPLICATION_ENV
+        );
+        $config = $config->toArray();
+        apc_store($key, $config);
+    }
+    $cachefile = APPLICATION_PATH . '/../data/cache/plugins.php';
+    if (file_exists($cachefile)) {
+        include_once $cachefile;
+    }
+    Zend_Loader_PluginLoader::setIncludeFileCache($cachefile);
 
-// Create application, bootstrap, and run
-$application = new Zend_Application(
-    APPLICATION_ENV,
-    APPLICATION_PATH . '/configs/application.ini'
-);
-$application->bootstrap()
-            ->run();
+    // Create application, bootstrap, and run
+    $application = new Zend_Application(
+        APPLICATION_ENV,
+    //    APPLICATION_PATH . '/configs/application.ini'
+        $config
+    );
+    $application->bootstrap()
+                ->run();
+}
