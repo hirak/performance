@@ -1,6 +1,6 @@
 <dl>
 <% foreach ($this->row as $key => $post): %>
- <dt><%= $this->escape($key) %></dt>
- <dd><%= $this->escape($post) %></dd>
+ <dt><%= h($key) %></dt>
+ <dd><%= h($post) %></dd>
 <% endforeach %>
 </dl>
