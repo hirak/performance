@@ -41,6 +41,7 @@
     </applicationDirectory>
     <dataDirectory>
       <cacheDirectory/>
+      <dbDirectory/>
       <searchIndexesDirectory enabled="false"/>
       <localesDirectory enabled="false"/>
       <logsDirectory enabled="false"/>
