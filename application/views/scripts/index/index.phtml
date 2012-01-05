@@ -1,3 +1,6 @@
+$this-&gt;rowは<% Zend_Debug::dump(get_class($this->row)) %>のインスタンスです。
+
+<% $this->row->sayHello() %>
 <dl>
 <% foreach ($this->row as $key => $post): %>
  <dt><%= h($key) %></dt>
