@@ -18,6 +18,8 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path()
 )));
 
+require_once 'functions.php';
+
 main();
 function main() {
     $key = 'app_performance';
